@@ -12,6 +12,8 @@ class TicketMessage extends Model
 
     protected $table = 'ticket_messages';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'ticket',
         'user',

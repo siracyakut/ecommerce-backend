@@ -12,6 +12,8 @@ class ChargeHistory extends Model
 
     protected $table = 'charge_histories';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'user',
         'amount',
