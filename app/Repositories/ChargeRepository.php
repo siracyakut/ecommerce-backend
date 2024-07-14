@@ -2,43 +2,41 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\ChargeInterface;
+use App\Interfaces\Repositories\ChargeInterface;
 use App\Models\ChargeHistory;
 use App\Models\User;
-use Exception;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Collection;
 
 class ChargeRepository implements ChargeInterface
 {
     protected $chargeHistory;
-    public function __construct(ChargeHistory $chargeHistory)
+    protected $user;
+    public function __construct(ChargeHistory $chargeHistory, User $user)
     {
         $this->chargeHistory = $chargeHistory;
+        $this->user = $user;
     }
 
-    public function list_all()
+    public function list_history_by_user($user_id): Collection
     {
-        $user_id = auth()->user()->id;
         $charges = $this->chargeHistory->where('user', $user_id)->get();
-
-        if (!$charges->count()) throw new Exception('No charges found');
-
         return $charges;
     }
 
-    public function create($amount)
+    public function add_credit($user_id, $amount): User
     {
-        $user_id = auth()->user()->id;
-        $user = User::find($user_id);
+        $_user = $this->user->find($user_id);
+        $_user->credit = $_user->credit + $amount;
+        $_user->save();
+        return $_user;
+    }
 
-        $user->credit = $user->credit + $amount;
-        $user->save();
-
+    public function create_history($user_id, $amount): ChargeHistory
+    {
         $history = $this->chargeHistory->create([
             'user' => $user_id,
             'amount' => $amount
         ]);
-
-        return [$user, $history];
+        return $history;
     }
 }

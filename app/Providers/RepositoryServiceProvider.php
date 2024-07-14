@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Interfaces\ChargeInterface;
+use App\Interfaces\Repositories\ChargeInterface;
 use App\Repositories\ChargeRepository;
 use Illuminate\Support\ServiceProvider;
 

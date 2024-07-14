@@ -32,6 +32,6 @@ class GuestMiddleware extends BaseMiddleware
         return response()->json([
             'success' => false,
             'data' => 'You are already logged in.'
-        ]);
+        ], 401);
     }
 }
