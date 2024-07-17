@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use App\Interfaces\Repositories\ChargeInterface;
+use App\Interfaces\Repositories\ChargeRepositoryInterface;
+use App\Interfaces\Repositories\TicketRepositoryInterface;
 use App\Repositories\ChargeRepository;
+use App\Repositories\TicketRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -13,7 +15,8 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(ChargeInterface::class, ChargeRepository::class);
+        $this->app->bind(ChargeRepositoryInterface::class, ChargeRepository::class);
+        $this->app->bind(TicketRepositoryInterface::class, TicketRepository::class);
     }
 
     /**

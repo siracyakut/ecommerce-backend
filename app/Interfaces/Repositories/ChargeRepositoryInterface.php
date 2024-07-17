@@ -6,7 +6,7 @@ use App\Models\ChargeHistory;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 
-interface ChargeInterface
+interface ChargeRepositoryInterface
 {
     public function list_history_by_user($user_id): Collection;
     public function add_credit($user_id, $amount): User;

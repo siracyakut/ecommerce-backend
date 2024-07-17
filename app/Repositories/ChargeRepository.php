@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\Repositories\ChargeInterface;
+use App\Interfaces\Repositories\ChargeRepositoryInterface;
 use App\Models\ChargeHistory;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 
-class ChargeRepository implements ChargeInterface
+class ChargeRepository implements ChargeRepositoryInterface
 {
     protected $chargeHistory;
     protected $user;
